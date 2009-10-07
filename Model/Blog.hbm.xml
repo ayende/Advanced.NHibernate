@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+				   assembly="Model"
+				   namespace="Model">
+	<class name="Blog"
+		   table="Blogs">
+    <cache usage="read-write"/>
+		<id name="Id">
+			<generator class="identity"/>
+		</id>
+		<property name="Title"/>
+		<property name="Subtitle"/>
+		<property name="SecurityKey"/>
+		<property name="AllowsComments"/>
+		<property name="CreatedAt"/>
+		<set name="Users"
+			 table="UsersBlogs">
+			<key column="BlogId"/>
+			<many-to-many class="User"
+						  column="UserId"/>
+		</set>
+		<set name="Posts"
+			 table="Posts">
+			<key column ="BlogId"/>
+			<one-to-many class="Post"/>
+		</set>
+		<set name="Tags"
+			 where="ISNULL(ItemType,2) = 2" 
+			 table="Tags">
+			<cache usage="read-write"/>
+			<key column="ItemId"/>
+			<one-to-many class="Tag"/>
+		</set>
+	</class>
+	<sql-query name="test">
+		<return-scalar column="Id"
+					   type="System.Int32"/>
+		select b.id as id from Blogs b
+	</sql-query>
+</hibernate-mapping>

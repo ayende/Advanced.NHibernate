@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+									 assembly="Model"
+									 namespace="Model">
+
+	<class name="User"
+				 table="Users">
+		<id name="Id">
+			<generator class="identity"/>
+		</id>
+		<property name="Password"/>
+		<property name="Username"/>
+		<property name="Email"/>
+		<property name="CreatedAt"/>
+		<property name="Bio"/>
+		<set name="Posts"
+				 table="Posts">
+			<key column="UserId"/>
+			<one-to-many class="Post"/>
+		</set>
+		<set name="Blogs"
+				 inverse="true"
+				 table="UsersBlogs">
+			<key column="UserId"/>
+			<many-to-many class="Blog"
+										column="BlogId"/>
+		</set>
+	</class>
+</hibernate-mapping>

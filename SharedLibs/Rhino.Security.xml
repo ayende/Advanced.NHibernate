@@ -1,0 +1,1486 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Rhino.Security</name>
+    </assembly>
+    <members>
+        <member name="T:Rhino.Security.Impl.Guard">
+            <summary>
+            Helper class for guard statements, which allow prettier
+            code for guard clauses
+            </summary>
+        </member>
+        <member name="M:Rhino.Security.Impl.Guard.Against(System.Boolean,System.String)">
+            <summary>
+            Will throw a <see cref="T:System.InvalidOperationException"/> if the assertion
+            is true, with the specificied message.
+            </summary>
+            <param name="assertion">if set to <c>true</c> [assertion].</param>
+            <param name="message">The message.</param>
+            <example>
+            Sample usage:
+            <code>
+            Guard.Against(string.IsNullOrEmpty(name), "Name must have a value");
+            </code>
+            </example>
+        </member>
+        <member name="M:Rhino.Security.Impl.Guard.Against``1(System.Boolean,System.String)">
+            <summary>
+            Will throw exception of type <typeparamref name="TException"/>
+            with the specified message if the assertion is true
+            </summary>
+            <typeparam name="TException"></typeparam>
+            <param name="assertion">if set to <c>true</c> [assertion].</param>
+            <param name="message">The message.</param>
+            <example>
+            Sample usage:
+            <code>
+            <![CDATA[
+            Guard.Against<ArgumentException>(string.IsNullOrEmpty(name), "Name must have a value");
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="T:Rhino.Security.Impl.MappingRewriting.SchemaChanger">
+            <summary>
+            Modify the NH configuration to set the correct schema
+            </summary>
+        </member>
+        <member name="M:Rhino.Security.Impl.MappingRewriting.SchemaChanger.#ctor(NHibernate.Cfg.Configuration,Rhino.Security.SecurityTableStructure)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Rhino.Security.Impl.MappingRewriting.SchemaChanger"/> class.
+            </summary>
+            <param name="cfg">The NHibernte configuration.</param>
+            <param name="tableStructure">The table structure.</param>
+        </member>
+        <member name="M:Rhino.Security.Impl.MappingRewriting.SchemaChanger.Change">
+            <summary>
+            Modify the configuration so it would set the schema or prefix based on the selected
+            table structure
+            </summary>
+        </member>
+        <member name="T:Rhino.Security.Impl.MappingRewriting.UserMapper">
+            <summary>
+            Map <seealso cref="T:Rhino.Security.IUser"/> to the domain model implementation of the User entity.
+            </summary>
+        </member>
+        <member name="M:Rhino.Security.Impl.MappingRewriting.UserMapper.#ctor(NHibernate.Cfg.Configuration,System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Rhino.Security.Impl.MappingRewriting.UserMapper"/> class.
+            </summary>
+            <param name="cfg">The NHibernate configuration.</param>
+            <param name="userType">Type of the user.</param>
+        </member>
+        <member name="M:Rhino.Security.Impl.MappingRewriting.UserMapper.Map">
+            <summary>
+            Modify the configuration so it would set all the references to <see cref="T:Rhino.Security.IUser"/>
+            to userEntityName.
+            </summary>
+        </member>
+        <member name="T:Rhino.Security.Services.SecurityCriterions">
+            <summary>
+            A factory for common DetachedCriteria.
+            </summary>
+        </member>
+        <member name="T:Rhino.Security.Services.AuthorizationRepository">
+            <summary>
+            Allows to edit the security information of the 
+            system
+            </summary>
+        </member>
+        <member name="T:Rhino.Security.Interfaces.IAuthorizationRepository">
+            <summary>
+            Allows to edit the security information of the 
+            system
+            </summary>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IAuthorizationRepository.CreateUsersGroup(System.String)">
+            <summary>
+            Creates a new users group.
+            </summary>
+            <param name="name">The name of the new group.</param>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IAuthorizationRepository.CreateEntitiesGroup(System.String)">
+            <summary>
+            Creates a new entities group.
+            </summary>
+            <param name="name">The name of the new group.</param>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IAuthorizationRepository.GetAssociatedUsersGroupFor(Rhino.Security.IUser)">
+            <summary>
+            Gets the associated users group for the specified user.
+            </summary>
+            <param name="user">The user.</param>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IAuthorizationRepository.GetUsersGroupByName(System.String)">
+            <summary>
+            Gets the users group by its name
+            </summary>
+            <param name="groupName">Name of the group.</param>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IAuthorizationRepository.GetEntitiesGroupByName(System.String)">
+            <summary>
+            Gets the entities group by its name
+            </summary>
+            <param name="groupName">The name of the group.</param>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IAuthorizationRepository.GetAssociatedEntitiesGroupsFor``1(``0)">
+            <summary>
+            Gets the groups the specified entity is associated with
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <param name="entity">The entity.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IAuthorizationRepository.AssociateEntityWith``1(``0,System.String)">
+            <summary>
+            Associates the entity with a group with the specified name
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <param name="entity">The entity.</param>
+            <param name="groupName">Name of the group.</param>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IAuthorizationRepository.AssociateEntityWith``1(``0,Rhino.Security.Model.EntitiesGroup)">
+            <summary>
+            Associates the entity with the specified group
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <param name="entity">The entity.</param>
+            <param name="group">The group.</param>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IAuthorizationRepository.AssociateUserWith(Rhino.Security.IUser,System.String)">
+            <summary>
+            Associates the user with a group with the specified name
+            </summary>
+            <param name="user">The user.</param>
+            <param name="groupName">Name of the group.</param>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IAuthorizationRepository.AssociateUserWith(Rhino.Security.IUser,Rhino.Security.Model.UsersGroup)">
+            <summary>
+            Associates the user with a group with the specified name
+            </summary>
+            <param name="user">The user.</param>
+            <param name="group">The group.</param>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IAuthorizationRepository.CreateOperation(System.String)">
+            <summary>
+            Creates the operation with the given name
+            </summary>
+            <param name="operationName">Name of the operation.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IAuthorizationRepository.GetOperationByName(System.String)">
+            <summary>
+            Gets the operation by the specified name
+            </summary>
+            <param name="operationName">Name of the operation.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IAuthorizationRepository.DetachUserFromGroup(Rhino.Security.IUser,System.String)">
+            <summary>
+            Removes the user from the specified group
+            </summary>
+            <param name="user">The user.</param>
+            <param name="usersGroupName">Name of the users group.</param>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IAuthorizationRepository.DetachEntityFromGroup``1(``0,System.String)">
+            <summary>
+            Removes the entities from the specified group
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <param name="entity">The entity.</param>
+            <param name="entitiesGroupName">Name of the entities group.</param>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IAuthorizationRepository.CreateChildUserGroupOf(System.String,System.String)">
+            <summary>
+            Creates the users group as a child of <paramref name="parentGroupName"/>.
+            </summary>
+            <param name="parentGroupName">Name of the parent group.</param>
+            <param name="usersGroupName">Name of the users group.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IAuthorizationRepository.GetAncestryAssociation(Rhino.Security.IUser,System.String)">
+            <summary>
+            Gets the ancestry association of a user with the named users group.
+            This allows to track how a user is associated to a group through 
+            their ancestry.
+            </summary>
+            <param name="user">The user.</param>
+            <param name="usersGroupName">Name of the users group.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IAuthorizationRepository.RemoveUsersGroup(System.String)">
+            <summary>
+            Removes the specified users group.
+            Cannot remove parent users groups, you must remove them first.
+            Will also delete all permissions that are related to this group.
+            </summary>
+            <param name="usersGroupName">Name of the users group.</param>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IAuthorizationRepository.RemoveEntitiesGroup(System.String)">
+            <summary>
+            Removes the specified entities group.
+            Will also delete all permissions that are associated with this group.
+            </summary>
+            <param name="entitesGroupName">Name of the entites group.</param>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IAuthorizationRepository.RemoveOperation(System.String)">
+            <summary>
+            Removes the specified operation.
+            Will also delete all permissions for this operation
+            </summary>
+            <param name="operationName">The operation N ame.</param>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IAuthorizationRepository.RemoveUser(Rhino.Security.IUser)">
+            <summary>
+            Removes the user from rhino security.
+            This does NOT delete the user itself, merely reset all the
+            information that rhino security knows about it.
+            It also allows it to be removed by external API without violating
+            FK constraints
+            </summary>
+            <param name="user">The user.</param>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IAuthorizationRepository.RemovePermission(Rhino.Security.Model.Permission)">
+            <summary>
+            Removes the specified permission.
+            </summary>
+            <param name="permission">The permission.</param>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IAuthorizationRepository.RenameUsersGroup(System.String,System.String)">
+            <summary>
+             Renames an existing users group
+            </summary>
+            <param name="usersGroupName">The name of the usersgroup to rename</param>
+            <param name="newName">The new name of the usersgroup</param>
+            <returns>The renamed group</returns> 
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IAuthorizationRepository.RenameEntitiesGroup(System.String,System.String)">
+            <summary>
+             Renames an existing entities group
+            </summary>
+            <param name="entitiesGroupName">The name of the entities group to rename</param>
+            <param name="newName">The new name of the entities group</param>
+            <returns>The renamed group</returns> 
+        </member>
+        <member name="M:Rhino.Security.Services.AuthorizationRepository.#ctor(NHibernate.ISession)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Rhino.Security.Services.AuthorizationRepository"/> class.
+            </summary>
+        </member>
+        <member name="M:Rhino.Security.Services.AuthorizationRepository.CreateUsersGroup(System.String)">
+            <summary>
+            Creates a new users group.
+            </summary>
+            <param name="name">The name of the new group.</param>
+        </member>
+        <member name="M:Rhino.Security.Services.AuthorizationRepository.CreateChildUserGroupOf(System.String,System.String)">
+            <summary>
+            Creates the users group as a child of <paramref name="parentGroupName"/>.
+            </summary>
+            <param name="parentGroupName">Name of the parent group.</param>
+            <param name="usersGroupName">Name of the users group.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Services.AuthorizationRepository.RemoveUsersGroup(System.String)">
+            <summary>
+            temporary string
+            </summary>
+            <param name="usersGroupName">Name of the users group.</param>
+        </member>
+        <member name="M:Rhino.Security.Services.AuthorizationRepository.RenameUsersGroup(System.String,System.String)">
+            <summary>
+             Renames an existing users group
+            </summary>
+            <param name="usersGroupName">The name of the usersgroup to rename</param>
+            <param name="newName">The new name of the usersgroup</param>
+            <returns>The renamed group</returns>       
+        </member>
+        <member name="M:Rhino.Security.Services.AuthorizationRepository.RemoveEntitiesGroup(System.String)">
+            <summary>
+            Removes the specified entities group.
+            Will also delete all permissions that are associated with this group.
+            </summary>
+            <param name="entitesGroupName">Name of the entites group.</param>
+        </member>
+        <member name="M:Rhino.Security.Services.AuthorizationRepository.RemoveOperation(System.String)">
+            <summary>
+            Removes the specified operation.
+            Will also delete all permissions for this operation
+            </summary>
+            <param name="operationName">The operation N ame.</param>
+        </member>
+        <member name="M:Rhino.Security.Services.AuthorizationRepository.GetAncestryAssociation(Rhino.Security.IUser,System.String)">
+            <summary>
+            Gets the ancestry association of a user with the named users group.
+            This allows to track how a user is associated to a group through 
+            their ancestry.
+            </summary>
+            <param name="user">The user.</param>
+            <param name="usersGroupName">Name of the users group.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Services.AuthorizationRepository.CreateEntitiesGroup(System.String)">
+            <summary>
+            Creates a new entities group.
+            </summary>
+            <param name="name">The name of the new group.</param>
+        </member>
+        <member name="M:Rhino.Security.Services.AuthorizationRepository.RenameEntitiesGroup(System.String,System.String)">
+            <summary>
+             Renames an existing entities group
+            </summary>
+            <param name="entitiesGroupName">The name of the entities group to rename</param>
+            <param name="newName">The new name of the entities group</param>
+            <returns>The renamed group</returns>       
+        </member>
+        <member name="M:Rhino.Security.Services.AuthorizationRepository.GetAssociatedUsersGroupFor(Rhino.Security.IUser)">
+            <summary>
+            Gets the associated users group for the specified user.
+            </summary>
+            <param name="user">The user.</param>
+        </member>
+        <member name="M:Rhino.Security.Services.AuthorizationRepository.GetUsersGroupByName(System.String)">
+            <summary>
+            Gets the users group by its name
+            </summary>
+            <param name="groupName">Name of the group.</param>
+        </member>
+        <member name="M:Rhino.Security.Services.AuthorizationRepository.GetEntitiesGroupByName(System.String)">
+            <summary>
+            Gets the entities group by its groupName
+            </summary>
+            <param name="groupName">The name of the group.</param>
+        </member>
+        <member name="M:Rhino.Security.Services.AuthorizationRepository.GetAssociatedEntitiesGroupsFor``1(``0)">
+            <summary>
+            Gets the groups the specified entity is associated with
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <param name="entity">The entity.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Services.AuthorizationRepository.AssociateEntityWith``1(``0,System.String)">
+            <summary>
+            Associates the entity with a group with the specified name
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <param name="entity">The entity.</param>
+            <param name="groupName">Name of the group.</param>
+        </member>
+        <member name="M:Rhino.Security.Services.AuthorizationRepository.AssociateEntityWith``1(``0,Rhino.Security.Model.EntitiesGroup)">
+            <summary>
+            Associates the entity with the specified group
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <param name="entity">The entity.</param>
+            <param name="entitiesGroup">The entities group.</param>
+        </member>
+        <member name="M:Rhino.Security.Services.AuthorizationRepository.AssociateUserWith(Rhino.Security.IUser,System.String)">
+            <summary>
+            Associates the user with a group with the specified name
+            </summary>
+            <param name="user">The user.</param>
+            <param name="groupName">Name of the group.</param>
+        </member>
+        <member name="M:Rhino.Security.Services.AuthorizationRepository.AssociateUserWith(Rhino.Security.IUser,Rhino.Security.Model.UsersGroup)">
+            <summary>
+            Associates the user with a group with the specified name
+            </summary>
+            <param name="user">The user.</param>
+            <param name="group">The group.</param>
+        </member>
+        <member name="M:Rhino.Security.Services.AuthorizationRepository.CreateOperation(System.String)">
+            <summary>
+            Creates the operation with the given name
+            </summary>
+            <param name="operationName">Name of the operation.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Services.AuthorizationRepository.GetOperationByName(System.String)">
+            <summary>
+            Gets the operation by the specified name
+            </summary>
+            <param name="operationName">Name of the operation.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Services.AuthorizationRepository.DetachUserFromGroup(Rhino.Security.IUser,System.String)">
+            <summary>
+            Removes the user from the specified group
+            </summary>
+            <param name="user">The user.</param>
+            <param name="usersGroupName">Name of the users group.</param>
+        </member>
+        <member name="M:Rhino.Security.Services.AuthorizationRepository.DetachEntityFromGroup``1(``0,System.String)">
+            <summary>
+            Removes the entities from the specified group
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <param name="entity">The entity.</param>
+            <param name="entitiesGroupName">Name of the entities group.</param>
+        </member>
+        <member name="M:Rhino.Security.Services.AuthorizationRepository.RemoveUser(Rhino.Security.IUser)">
+            <summary>
+            Removes the user from rhino security.
+            This does NOT delete the user itself, merely reset all the
+            information that rhino security knows about it.
+            It also allows it to be removed by external API without violating
+            FK constraints
+            </summary>
+            <param name="user">The user.</param>
+        </member>
+        <member name="M:Rhino.Security.Services.AuthorizationRepository.RemovePermission(Rhino.Security.Model.Permission)">
+            <summary>
+            Removes the specified permission.
+            </summary>
+            <param name="permission">The permission.</param>
+        </member>
+        <member name="T:Rhino.Security.AuthorizationInformation">
+            <summary>
+            Authorization Information relating to a specific 
+            user/operation/entity.
+            Allows to display the reasons for granting/denying permissions
+            </summary>
+        </member>
+        <member name="M:Rhino.Security.AuthorizationInformation.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+            </summary>
+            <returns>
+            A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+            </returns>
+        </member>
+        <member name="M:Rhino.Security.AuthorizationInformation.AddAllow(System.String,System.Object[])">
+            <summary>
+            Adds the specified formatted message that explains 
+            why permission was allowed
+            </summary>
+            <param name="format">The format.</param>
+            <param name="args">The args.</param>
+        </member>
+        <member name="M:Rhino.Security.AuthorizationInformation.AddDeny(System.String,System.Object[])">
+            <summary>
+            Adds the specified formatted message that explains 
+            why permission was denied
+            </summary>
+            <param name="format">The format.</param>
+            <param name="args">The args.</param>
+        </member>
+        <member name="T:Rhino.Security.Services.AuthorizationService">
+            <summary>
+            Answers authorization questions as well as enhance Criteria
+            queries
+            </summary>
+        </member>
+        <member name="T:Rhino.Security.Interfaces.IAuthorizationService">
+            <summary>
+             Implementors of this interface are able to answer
+             on authorization questions as well as enhance Criteria
+             queries
+            </summary>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IAuthorizationService.AddPermissionsToQuery(Rhino.Security.IUser,System.String,NHibernate.ICriteria)">
+            <summary>
+            Adds the permissions to the criteria query.
+            </summary>
+            <param name="user">The user.</param>
+            <param name="criteria">The criteria.</param>
+            <param name="operation">The operation.</param>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IAuthorizationService.AddPermissionsToQuery(Rhino.Security.Model.UsersGroup,System.String,NHibernate.ICriteria)">
+            <summary>
+             Adds the permissions to the criteria query for the given usersgroup
+            </summary>
+            <param name="usersgroup">The usersgroup. Only permissions directly related to this usergroup 
+             are taken into account</param>
+            <param name="operation">The operation</param>
+            <param name="criteria">The criteria</param>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IAuthorizationService.AddPermissionsToQuery(Rhino.Security.IUser,System.String,NHibernate.Criterion.DetachedCriteria)">
+            <summary>
+            Adds the permissions to the criteria query.
+            </summary>
+            <param name="user">The user.</param>
+            <param name="criteria">The criteria.</param>
+            <param name="operation">The operation.</param>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IAuthorizationService.AddPermissionsToQuery(Rhino.Security.Model.UsersGroup,System.String,NHibernate.Criterion.DetachedCriteria)">
+            <summary>Adds the permissions to the criteria query for the given usersgroup
+            </summary>
+            <param name="usersgroup">The usersgroup. Only permissions directly related to this usergroup
+             are taken into account</param>
+            <param name="operation">The operation</param>
+            <param name="criteria">The criteria</param>        
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IAuthorizationService.IsAllowed``1(Rhino.Security.IUser,``0,System.String)">
+            <summary>
+            Determines whether the specified user is allowed to perform the specified 
+            operation on the entity
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <param name="user">The user.</param>
+            <param name="entity">The entity.</param>
+            <param name="operation">The operation.</param>
+            <returns>
+            	<c>true</c> if the specified user is allowed; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IAuthorizationService.IsAllowed(Rhino.Security.IUser,System.String)">
+            <summary>
+            Determines whether the specified user is allowed to perform the
+            specified operation on the entity.
+            </summary>
+            <param name="user">The user.</param>
+            <param name="operation">The operation.</param>
+            <returns>
+            	<c>true</c> if the specified user is allowed; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IAuthorizationService.GetAuthorizationInformation(Rhino.Security.IUser,System.String)">
+            <summary>
+            Gets the authorization information for the specified user and operation,
+            allows to easily understand why a given operation was granted / denied.
+            </summary>
+            <param name="user">The user.</param>
+            <param name="operation">The operation.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IAuthorizationService.GetAuthorizationInformation``1(Rhino.Security.IUser,``0,System.String)">
+            <summary>
+            Gets the authorization information for the specified user and operation on the 
+            given entity,  allows to easily understand why a given operation was granted / denied.
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <param name="user">The user.</param>
+            <param name="entity">The entity.</param>
+            <param name="operation">The operation.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Services.AuthorizationService.#ctor(Rhino.Security.Interfaces.IPermissionsService,Rhino.Security.Interfaces.IAuthorizationRepository)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Rhino.Security.Services.AuthorizationService"/> class.
+            </summary>
+            <param name="permissionsService">The permissions service.</param>
+            <param name="authorizationRepository">The authorization editing service.</param>
+        </member>
+        <member name="M:Rhino.Security.Services.AuthorizationService.AddPermissionsToQuery(Rhino.Security.IUser,System.String,NHibernate.ICriteria)">
+            <summary>
+            Adds the permissions to the criteria query.
+            </summary>
+            <param name="user">The user.</param>
+            <param name="criteria">The criteria.</param>
+            <param name="operation">The operation.</param>
+        </member>
+        <member name="M:Rhino.Security.Services.AuthorizationService.AddPermissionsToQuery(Rhino.Security.Model.UsersGroup,System.String,NHibernate.ICriteria)">
+            <summary>
+             Adds the permissions to the criteria query for the given usersgroup
+            </summary>
+            <param name="usersgroup">The usersgroup. Only permissions directly related to this usergroup
+             are taken into account</param>
+            <param name="operation">The operation</param>
+            <param name="criteria">The criteria</param>
+        </member>
+        <member name="M:Rhino.Security.Services.AuthorizationService.AddPermissionsToQuery(Rhino.Security.IUser,System.String,NHibernate.Criterion.DetachedCriteria)">
+            <summary>
+            Adds the permissions to query.
+            </summary>
+            <param name="user">The user.</param>
+            <param name="criteria">The criteria.</param>
+            <param name="operation">The operation.</param>
+        </member>
+        <member name="M:Rhino.Security.Services.AuthorizationService.AddPermissionsToQuery(Rhino.Security.Model.UsersGroup,System.String,NHibernate.Criterion.DetachedCriteria)">
+            <summary>Adds the permissions to the criteria query for the given usersgroup
+            </summary>
+            <param name="usersgroup">The usersgroup. Only permissions directly related to this usergroup
+             are taken into account</param>
+            <param name="operation">The operation</param>
+            <param name="criteria">The criteria</param>
+        </member>
+        <member name="M:Rhino.Security.Services.AuthorizationService.IsAllowed``1(Rhino.Security.IUser,``0,System.String)">
+            <summary>
+            Determines whether the specified user is allowed to perform the specified
+            operation on the entity
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <param name="user">The user.</param>
+            <param name="entity">The entity.</param>
+            <param name="operation">The operation.</param>
+            <returns>
+            	<c>true</c> if the specified user is allowed; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Rhino.Security.Services.AuthorizationService.IsAllowed(Rhino.Security.IUser,System.String)">
+            <summary>
+            Determines whether the specified user is allowed to perform the
+            specified operation on the entity.
+            </summary>
+            <param name="user">The user.</param>
+            <param name="operation">The operation.</param>
+            <returns>
+            	<c>true</c> if the specified user is allowed; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Rhino.Security.Services.AuthorizationService.GetAuthorizationInformation(Rhino.Security.IUser,System.String)">
+            <summary>
+            Gets the authorization information for the specified user and operation,
+            allows to easily understand why a given operation was granted / denied.
+            </summary>
+            <param name="user">The user.</param>
+            <param name="operation">The operation.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Services.AuthorizationService.GetAuthorizationInformation``1(Rhino.Security.IUser,``0,System.String)">
+            <summary>
+            Gets the authorization information for the specified user and operation on the
+            given entity,  allows to easily understand why a given operation was granted / denied.
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <param name="user">The user.</param>
+            <param name="entity">The entity.</param>
+            <param name="operation">The operation.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Rhino.Security.Model.EntitiesGroup">
+            <summary>
+            A grouping of entities, with some business meaning.
+            </summary>
+        </member>
+        <member name="T:Rhino.Security.Model.NamedEntity`1">
+            <summary>
+            An entity with a name
+            </summary>
+        </member>
+        <member name="T:Rhino.Security.Model.EqualityAndHashCodeProvider`1">
+            <summary>
+            This is a trivial class that is used to make sure that Equals and GetHashCode
+            are properly overloaded with the correct semantics. This is exteremely important
+            if you are going to deal with objects outside the current Unit of Work.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:Rhino.Security.Interfaces.IIDentifiable">
+            <summary>
+            Mark an entity with an id
+            </summary>
+        </member>
+        <member name="P:Rhino.Security.Interfaces.IIDentifiable.Id">
+            <summary>
+            Gets or sets the id.
+            </summary>
+            <value>The id.</value>
+        </member>
+        <member name="M:Rhino.Security.Model.EqualityAndHashCodeProvider`1.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object"></see> is equal to the current <see cref="T:System.Object"></see>.
+            </summary>
+            <param name="obj">The <see cref="T:System.Object"></see> to compare with the current <see cref="T:System.Object"></see>.</param>
+            <returns>
+            true if the specified <see cref="T:System.Object"></see> is equal to the current <see cref="T:System.Object"></see>; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:Rhino.Security.Model.EqualityAndHashCodeProvider`1.GetHashCode">
+            <summary>
+            Serves as a hash function for a particular type. <see cref="M:System.Object.GetHashCode"></see> is suitable for use in hashing algorithms and data structures like a hash table.
+            </summary>
+            <returns>
+            A hash code for the current <see cref="T:System.Object"></see>.
+            </returns>
+        </member>
+        <member name="M:Rhino.Security.Model.EqualityAndHashCodeProvider`1.op_Equality(Rhino.Security.Model.EqualityAndHashCodeProvider{`0},Rhino.Security.Model.EqualityAndHashCodeProvider{`0})">
+            <summary>
+            Equality operator so we can have == semantics
+            </summary>
+        </member>
+        <member name="M:Rhino.Security.Model.EqualityAndHashCodeProvider`1.op_Inequality(Rhino.Security.Model.EqualityAndHashCodeProvider{`0},Rhino.Security.Model.EqualityAndHashCodeProvider{`0})">
+            <summary>
+            Inequality operator so we can have != semantics
+            </summary>
+        </member>
+        <member name="P:Rhino.Security.Model.EqualityAndHashCodeProvider`1.Id">
+            <summary>
+            Gets or sets the id of this entity
+            </summary>
+            <value>The id.</value>
+        </member>
+        <member name="M:Rhino.Security.Model.NamedEntity`1.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+            </summary>
+            <returns>
+            A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+            </returns>
+        </member>
+        <member name="P:Rhino.Security.Model.NamedEntity`1.Name">
+            <summary>
+            Gets or sets the name of this entity.
+            </summary>
+            <value>The name.</value>
+            <remarks>
+            The name can be set only on creation, and is not changed
+            afterward.
+            </remarks>
+        </member>
+        <member name="M:Rhino.Security.Model.EntitiesGroup.#ctor">
+            <summary>
+             Create a new instance of <c>EntitiesGroup</c>
+            </summary>
+        </member>
+        <member name="P:Rhino.Security.Model.EntitiesGroup.Entities">
+            <summary>
+            Gets or sets the entities security keys beloging to this entities group
+            </summary>
+            <value>The entities security keys.</value>
+        </member>
+        <member name="T:Rhino.Security.Model.EntityReference">
+            <summary>
+            A reference to an entity in the domain
+            </summary>
+        </member>
+        <member name="P:Rhino.Security.Model.EntityReference.EntitySecurityKey">
+            <summary>
+            Gets or sets the entity security key.
+            </summary>
+            <value>The entity security key.</value>
+        </member>
+        <member name="P:Rhino.Security.Model.EntityReference.Type">
+            <summary>
+            Gets or sets the type of the entity this instance
+            reference
+            </summary>
+            <value>The type.</value>
+        </member>
+        <member name="T:Rhino.Security.Interfaces.IEntityInformationExtractor`1">
+            <summary>
+            An extension point that allow user of rhino security
+            to provide the information about an entity without
+            having to modify the domain model or having to know anything about it
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IEntityInformationExtractor`1.GetSecurityKeyFor(`0)">
+            <summary>
+            Gets the security key for the specified entity
+            </summary>
+            <param name="entity">The entity.</param>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IEntityInformationExtractor`1.GetDescription(System.Guid)">
+            <summary>
+            Gets the description of this security key, used when rhino security needs
+            to generate a message that involves this security key
+            </summary>
+            <param name="securityKey">The security key.</param>
+            <returns></returns>
+        </member>
+        <member name="P:Rhino.Security.Interfaces.IEntityInformationExtractor`1.SecurityKeyPropertyName">
+            <summary>
+            Gets the name of the security key property.
+            </summary>
+            <value>The name of the security key property.</value>
+        </member>
+        <member name="T:Rhino.Security.Interfaces.IForPermissionBuilder">
+            <summary>
+            Define who this permission is for
+            </summary>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IForPermissionBuilder.For(Rhino.Security.IUser)">
+            <summary>
+            Set the user that this permission is built for
+            </summary>
+            <param name="user">The user.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IForPermissionBuilder.For(Rhino.Security.Model.UsersGroup)">
+            <summary>
+            Set the users group that this permission is built for
+            </summary>
+            <param name="group">The group.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IForPermissionBuilder.For(System.String)">
+            <summary>
+            Set the users group that this permission is built for
+            </summary>
+            <param name="usersGroupName">Name of the users group.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Rhino.Security.Interfaces.ILevelPermissionBuilder">
+            <summary>
+            Define what is the level of this permission
+            </summary>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.ILevelPermissionBuilder.Level(System.Int32)">
+            <summary>
+            Define the level of this permission
+            </summary>
+            <param name="level">The level.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.ILevelPermissionBuilder.DefaultLevel">
+            <summary>
+            Define the default level;
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Rhino.Security.Interfaces.IOnPermissionBuilder">
+            <summary>
+            Define who this permission is on
+            </summary>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IOnPermissionBuilder.On``1(``0)">
+            <summary>
+            Set the entity this permission is built for
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <param name="entity">The entity.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IOnPermissionBuilder.On(Rhino.Security.Model.EntitiesGroup)">
+            <summary>
+            Set the entity group this permission is built for
+            </summary>
+            <param name="entity">The entity.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IOnPermissionBuilder.On(System.String)">
+            <summary>
+            Set the entity group this permission is built for
+            </summary>
+            <param name="entitiesGroupName">Name of the entities group.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IOnPermissionBuilder.OnEverything">
+            <summary>
+            Set this permission to be application to everything
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Rhino.Security.Interfaces.IPermissionBuilder">
+            <summary>
+            Save the created permission
+            </summary>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IPermissionBuilder.Save">
+            <summary>
+            Save the created permission
+            </summary>
+        </member>
+        <member name="T:Rhino.Security.Interfaces.IPermissionsBuilderService">
+            <summary>
+            Allow to define permissions using a fluent interface
+            </summary>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IPermissionsBuilderService.Allow(System.String)">
+            <summary>
+            Allow permission for the specified operation.
+            </summary>
+            <param name="operationName">Name of the operation.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IPermissionsBuilderService.Deny(System.String)">
+            <summary>
+            Deny permission for the specified operation 
+            </summary>
+            <param name="operationName">Name of the operation.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IPermissionsBuilderService.Allow(Rhino.Security.Model.Operation)">
+            <summary>
+            Allow permission for the specified operation.
+            </summary>
+            <param name="operation">The operation.</param>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IPermissionsBuilderService.Deny(Rhino.Security.Model.Operation)">
+            <summary>
+            Deny permission for the specified operation 
+            </summary>
+            <param name="operation">The operation.</param>
+        </member>
+        <member name="T:Rhino.Security.Interfaces.IPermissionsService">
+            <summary>
+            Allow to retrieve and remove permissions
+            on users, user groups, entities groups and entities.
+            </summary>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IPermissionsService.GetPermissionsFor(Rhino.Security.IUser)">
+            <summary>
+            Gets the permissions for the specified user
+            </summary>
+            <param name="user">The user.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IPermissionsService.GetPermissionsFor``1(Rhino.Security.IUser,``0)">
+            <summary>
+            Gets the permissions for the specified user and entity
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <param name="user">The user.</param>
+            <param name="entity">The entity.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IPermissionsService.GetGlobalPermissionsFor(Rhino.Security.IUser,System.String)">
+            <summary>
+            Gets the permissions for the specified etntity
+            </summary>
+            <param name="user">The user.</param>
+            <param name="operationName">Name of the operation.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IPermissionsService.GetPermissionsFor``1(Rhino.Security.IUser,``0,System.String)">
+            <summary>
+            Gets the permissions for the specified etntity
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <param name="user">The user.</param>
+            <param name="entity">The entity.</param>
+            <param name="operationName">Name of the operation.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Interfaces.IPermissionsService.GetPermissionsFor``1(``0)">
+            <summary>
+            Gets the permissions for the specified etntity
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <param name="entity">The entity.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Rhino.Security.Services.PermissionsBuilderService">
+            <summary>
+            Allow to define permissions using a fluent interface
+            </summary>
+        </member>
+        <member name="M:Rhino.Security.Services.PermissionsBuilderService.#ctor(NHibernate.ISession,Rhino.Security.Interfaces.IAuthorizationRepository)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Rhino.Security.Services.PermissionsBuilderService"/> class.
+            </summary>
+            <param name="session">The nhibernate session</param>
+            <param name="authorizationRepository">The authorization editing service.</param>
+        </member>
+        <member name="M:Rhino.Security.Services.PermissionsBuilderService.Save(Rhino.Security.Model.Permission)">
+            <summary>
+            Saves the specified permission
+            </summary>
+            <param name="permission">The permission.</param>
+        </member>
+        <member name="M:Rhino.Security.Services.PermissionsBuilderService.Allow(System.String)">
+            <summary>
+            Allow permission for the specified operation.
+            </summary>
+            <param name="operationName">Name of the operation.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Services.PermissionsBuilderService.Deny(System.String)">
+            <summary>
+            Deny permission for the specified operation 
+            </summary>
+            <param name="operationName">Name of the operation.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Services.PermissionsBuilderService.Allow(Rhino.Security.Model.Operation)">
+            <summary>
+            Allow permission for the specified operation.
+            </summary>
+            <param name="operation">The operation.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Services.PermissionsBuilderService.Deny(Rhino.Security.Model.Operation)">
+            <summary>
+            Deny permission for the specified operation
+            </summary>
+            <param name="operation">The operation.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Rhino.Security.Services.PermissionsBuilderService.FluentPermissionBuilder">
+            <summary>
+            Builds a permission
+            </summary>
+        </member>
+        <member name="M:Rhino.Security.Services.PermissionsBuilderService.FluentPermissionBuilder.#ctor(Rhino.Security.Services.PermissionsBuilderService,System.Boolean,Rhino.Security.Model.Operation)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Rhino.Security.Services.PermissionsBuilderService.FluentPermissionBuilder"/> class.
+            </summary>
+            <param name="permissionBuilderService">The permission service.</param>
+            <param name="allow">if set to <c>true</c> create an allow permission.</param>
+            <param name="operation">The operation.</param>
+        </member>
+        <member name="M:Rhino.Security.Services.PermissionsBuilderService.FluentPermissionBuilder.Save">
+            <summary>
+            Save the created permission
+            </summary>
+        </member>
+        <member name="M:Rhino.Security.Services.PermissionsBuilderService.FluentPermissionBuilder.For(Rhino.Security.IUser)">
+            <summary>
+            Set the user that this permission is built for
+            </summary>
+            <param name="user">The user.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Services.PermissionsBuilderService.FluentPermissionBuilder.For(System.String)">
+            <summary>
+            Set the users group that this permission is built for
+            </summary>
+            <param name="usersGroupName">Name of the users group.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Services.PermissionsBuilderService.FluentPermissionBuilder.For(Rhino.Security.Model.UsersGroup)">
+            <summary>
+            Set the users group that this permission is built for
+            </summary>
+            <param name="usersGroup">The users group.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Services.PermissionsBuilderService.FluentPermissionBuilder.On``1(``0)">
+            <summary>
+            Set the entity this permission is built for
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <param name="entity">The account.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Services.PermissionsBuilderService.FluentPermissionBuilder.On(System.String)">
+            <summary>
+            Set the entity group this permission is built for
+            </summary>
+            <param name="entitiesGroupName">Name of the entities group.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Services.PermissionsBuilderService.FluentPermissionBuilder.On(Rhino.Security.Model.EntitiesGroup)">
+            <summary>
+            Set the entity group this permission is built for
+            </summary>
+            <param name="entitiesGroup">The entities group.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Services.PermissionsBuilderService.FluentPermissionBuilder.OnEverything">
+            <summary>
+            Set this permission to be application to everything
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Services.PermissionsBuilderService.FluentPermissionBuilder.Level(System.Int32)">
+            <summary>
+            Define the level of this permission
+            </summary>
+            <param name="level">The level.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Services.PermissionsBuilderService.FluentPermissionBuilder.DefaultLevel">
+            <summary>
+            Define the default level;
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Rhino.Security.Services.PermissionsService">
+            <summary>
+            Allow to retrieve and remove permissions
+            on users, user groups, entities groups and entities.
+            </summary>
+        </member>
+        <member name="M:Rhino.Security.Services.PermissionsService.#ctor(Rhino.Security.Interfaces.IAuthorizationRepository,NHibernate.ISession)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Rhino.Security.Services.PermissionsService"/> class.
+            </summary>
+            <param name="authorizationRepository">The authorization editing service.</param>
+            <param name="session">The NHibernate session</param>
+        </member>
+        <member name="M:Rhino.Security.Services.PermissionsService.GetPermissionsFor(Rhino.Security.IUser)">
+            <summary>
+            Gets the permissions for the specified user
+            </summary>
+            <param name="user">The user.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Services.PermissionsService.GetGlobalPermissionsFor(Rhino.Security.IUser,System.String)">
+            <summary>
+            Gets the permissions for the specified etntity
+            </summary>
+            <param name="user">The user.</param>
+            <param name="operationName">Name of the operation.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Services.PermissionsService.GetPermissionsFor``1(Rhino.Security.IUser,``0)">
+            <summary>
+            Gets the permissions for the specified user and entity
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="user">The user.</param>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Services.PermissionsService.GetPermissionsFor``1(Rhino.Security.IUser,``0,System.String)">
+            <summary>
+            Gets the permissions for the specified etntity
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <param name="user">The user.</param>
+            <param name="entity">The entity.</param>
+            <param name="operationName">Name of the operation.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Services.PermissionsService.GetPermissionsFor``1(``0)">
+            <summary>
+            Gets the permissions for the specified etntity
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <param name="entity">The entity.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Rhino.Security.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Rhino.Security.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Rhino.Security.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Rhino.Security.Properties.Resources.EntityWithGroups">
+            <summary>
+              Looks up a localized string similar to &apos;{0}&apos; (&apos;{1}&apos; is a member of &apos;{2}&apos;).
+            </summary>
+        </member>
+        <member name="P:Rhino.Security.Properties.Resources.Everything">
+            <summary>
+              Looks up a localized string similar to everything.
+            </summary>
+        </member>
+        <member name="P:Rhino.Security.Properties.Resources.NonUniqueName">
+            <summary>
+              Looks up a localized string similar to Names must be unique.
+            </summary>
+        </member>
+        <member name="P:Rhino.Security.Properties.Resources.NotAssociatedWithAnyGroup">
+            <summary>
+              Looks up a localized string similar to not assoicated with any group.
+            </summary>
+        </member>
+        <member name="P:Rhino.Security.Properties.Resources.OperationNotDefined">
+            <summary>
+              Looks up a localized string similar to Operation &apos;{0}&apos; was not defined.
+            </summary>
+        </member>
+        <member name="P:Rhino.Security.Properties.Resources.PermissionDeniedForUser">
+            <summary>
+              Looks up a localized string similar to Permission (level {3}) for operation &apos;{0}&apos; was denied to &apos;{1}&apos; on &apos;{2}&apos;.
+            </summary>
+        </member>
+        <member name="P:Rhino.Security.Properties.Resources.PermissionDeniedForUsersGroup">
+            <summary>
+              Looks up a localized string similar to Permission (level {4}) for operation &apos;{0}&apos; was denied to group &apos;{1}&apos; on &apos;{2}&apos; (&apos;{3}&apos; is a member of &apos;{5}&apos;).
+            </summary>
+        </member>
+        <member name="P:Rhino.Security.Properties.Resources.PermissionForOperationNotGrantedToUser">
+            <summary>
+              Looks up a localized string similar to Permission for operation &apos;{0}&apos; was not granted to user &apos;{1}&apos; or to the groups &apos;{1}&apos; is associated with (&apos;{2}&apos;).
+            </summary>
+        </member>
+        <member name="P:Rhino.Security.Properties.Resources.PermissionForOperationNotGrantedToUserOnEntity">
+            <summary>
+              Looks up a localized string similar to Permission for operation &apos;{0}&apos; was not granted to user &apos;{1}&apos; or to the groups &apos;{1}&apos; is associated with (&apos;{2}&apos;) on &apos;{3}&apos; or any of the groups &apos;{3}&apos; is associated with (&apos;{4}&apos;).
+            </summary>
+        </member>
+        <member name="P:Rhino.Security.Properties.Resources.PermissionGrantedForUser">
+            <summary>
+              Looks up a localized string similar to Permission (level {3}) for operation &apos;{0}&apos; was granted to &apos;{1}&apos; on &apos;{2}&apos;.
+            </summary>
+        </member>
+        <member name="P:Rhino.Security.Properties.Resources.PermissionGrantedForUsersGroup">
+            <summary>
+              Looks up a localized string similar to Permission (level {4}) for operation &apos;{0}&apos; was granted to group &apos;{1}&apos; on &apos;{2}&apos; (&apos;{3}&apos; is a member of &apos;{5}&apos;).
+            </summary>
+        </member>
+        <member name="T:Rhino.Security.Security">
+            <summary>
+            This class allows to configure the security system
+            </summary>
+        </member>
+        <member name="M:Rhino.Security.Security.ExtractKey``1(``0)">
+            <summary>
+            Extracts the key from the specified entity.
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <param name="entity">The entity.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Security.GetDescription``1(``0)">
+            <summary>
+            Gets a human readable description for the specified entity
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <param name="entity">The entity.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Security.GetSecurityKeyProperty(System.Type)">
+            <summary>
+            Gets the security key property for the specified entity type
+            </summary>
+            <param name="entityType">Type of the entity.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Security.Configure``1(NHibernate.Cfg.Configuration,Rhino.Security.SecurityTableStructure)">
+            <summary>
+             Setup NHibernate to include Rhino Security configuration
+            </summary>
+        </member>
+        <member name="T:Rhino.Security.Model.EntityType">
+            <summary>
+            Mapping an entity in the domain so the security 
+            system can work with it.
+            </summary>
+            <remarks>
+            We are purposefully using the FullName of a type here,
+            instead of assembly qualified name. This is to avoid
+            versioning issues with the assembly version.
+            </remarks>
+        </member>
+        <member name="T:Rhino.Security.SecurityInfo">
+            <summary>
+            Contains the information about the user that
+            rhino security requires.
+            </summary>
+        </member>
+        <member name="M:Rhino.Security.SecurityInfo.#ctor(System.String,System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Rhino.Security.SecurityInfo"/> class.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="identifier">The identifier.</param>
+        </member>
+        <member name="P:Rhino.Security.SecurityInfo.Identifier">
+            <summary>
+            Gets the identifier.
+            </summary>
+            <value>The identifier.</value>
+        </member>
+        <member name="P:Rhino.Security.SecurityInfo.Name">
+            <summary>
+            Gets the name.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="T:Rhino.Security.SecurityKeyType">
+            <summary>
+            What type the security key is
+            </summary>
+        </member>
+        <member name="F:Rhino.Security.SecurityKeyType.Type">
+            <summary>
+            A type
+            </summary>
+        </member>
+        <member name="F:Rhino.Security.SecurityKeyType.Instance">
+            <summary>
+            An instance
+            </summary>
+        </member>
+        <member name="T:Rhino.Security.SecurityTableStructure">
+            <summary>
+            A flag that determains how the security tables should be treated.
+            In a separate schema or using a naming convention.
+            The default is to put them in a separate schema.
+            </summary>
+        </member>
+        <member name="F:Rhino.Security.SecurityTableStructure.Schema">
+            <summary>
+            Use a "security" schema
+            </summary>
+        </member>
+        <member name="F:Rhino.Security.SecurityTableStructure.Prefix">
+            <summary>
+            Use a "security_" prefix
+            </summary>
+        </member>
+        <member name="T:Rhino.Security.Impl.Util.Strings">
+            <summary>
+            String utility methods
+            </summary>
+        </member>
+        <member name="M:Rhino.Security.Impl.Util.Strings.GetParentOperationName(System.String)">
+            <summary>
+            Gets the name of the parent operation.
+            </summary>
+            <param name="operationName">Name of the operation.</param>
+            <remarks>
+            Assumes that there is a '/' in the string
+            </remarks>
+        </member>
+        <member name="M:Rhino.Security.Impl.Util.Strings.GetHierarchicalOperationNames(System.String)">
+            <summary>
+            Gets the names of all the parent operations (including the current one)
+            </summary>
+            <param name="operationName">Name of the operation.</param>
+            <remarks>
+            Assumes that there is a '/' in the string
+            </remarks>
+        </member>
+        <member name="M:Rhino.Security.Impl.Util.Strings.Join``1(Rhino.Security.Model.NamedEntity{``0}[],System.String)">
+            <summary>
+            Joins the names of all the specified entities.
+            </summary>
+            <typeparam name="TNamedEntity">The type of the named entity.</typeparam>
+            <param name="entities">The entities.</param>
+            <param name="separator">The separator.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.Security.Impl.Util.Strings.Join``1(Rhino.Security.Model.NamedEntity{``0}[])">
+            <summary>
+            Joins the names of all the specified entities.
+            </summary>
+            <typeparam name="TNamedEntity">The type of the named entity.</typeparam>
+            <param name="entities">The entities.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Rhino.Security.Model.UsersGroup">
+            <summary>
+            A named group for users, which we 
+            can define operations on.
+            </summary>
+        </member>
+        <member name="M:Rhino.Security.Model.UsersGroup.#ctor">
+            <summary>
+             Create a new instance of <c>UsersGroup</c>
+            </summary>
+        </member>
+        <member name="P:Rhino.Security.Model.UsersGroup.Users">
+            <summary>
+            Gets or sets the users.
+            </summary>
+            <value>The users.</value>
+        </member>
+        <member name="P:Rhino.Security.Model.UsersGroup.Parent">
+            <summary>
+            Gets or sets the parent of this group
+            </summary>
+            <value>The parent.</value>
+        </member>
+        <member name="P:Rhino.Security.Model.UsersGroup.DirectChildren">
+            <summary>
+            Gets or sets the direct children of this group (nested one level)
+            </summary>
+            <value>The directChildren.</value>
+        </member>
+        <member name="P:Rhino.Security.Model.UsersGroup.AllChildren">
+            <summary>
+            Gets or sets all children of this users group, at all nesting levels
+            </summary>
+            <value>All children.</value>
+        </member>
+        <member name="P:Rhino.Security.Model.UsersGroup.AllParents">
+            <summary>
+            Gets or sets all parent of this users group, at all nesting levels
+            </summary>
+            <value>All children.</value>
+        </member>
+        <member name="T:Rhino.Security.IUser">
+            <summary>
+            Provide a way to get the security information from a user instance.
+            Used to separate the domain model's user from the requirements of the 
+            security systems
+            </summary>
+        </member>
+        <member name="P:Rhino.Security.IUser.SecurityInfo">
+            <summary>
+            Gets or sets the security info for this user
+            </summary>
+            <value>The security info.</value>
+        </member>
+        <member name="T:Rhino.Security.Model.Operation">
+            <summary>
+            Represent an operation in the system
+            </summary>
+        </member>
+        <member name="M:Rhino.Security.Model.Operation.#ctor">
+            <summary>
+             Create instance of <c>Operation</c>
+            </summary>
+        </member>
+        <member name="P:Rhino.Security.Model.Operation.Comment">
+            <summary>
+            Gets or sets the comment for this operation
+            </summary>
+            <value>The comment.</value>
+        </member>
+        <member name="P:Rhino.Security.Model.Operation.Parent">
+            <summary>
+            Gets or sets the parent of this operation
+            </summary>
+            <value>The parent.</value>
+        </member>
+        <member name="P:Rhino.Security.Model.Operation.Children">
+            <summary>
+            Gets or sets the children of this operation
+            </summary>
+            <value>The children.</value>
+        </member>
+        <member name="T:Rhino.Security.Model.Permission">
+            <summary>
+            Represent a permission on the system, allow (or denying) 
+            [operation] for [someone] on [something]
+            </summary>
+        </member>
+        <member name="M:Rhino.Security.Model.Permission.SetEntityType(System.Type)">
+            <summary>
+            Sets the type of the entity.
+            </summary>
+            <param name="type">The type.</param>
+            <remarks>
+            This uses the weak assembly name to protect us from versioning issues
+            </remarks>
+        </member>
+        <member name="P:Rhino.Security.Model.Permission.Operation">
+            <summary>
+            Gets or sets the operation this permission applies to
+            </summary>
+            <value>The operation.</value>
+        </member>
+        <member name="P:Rhino.Security.Model.Permission.EntitySecurityKey">
+            <summary>
+            Gets or sets the entity security key this permission belongs to
+            </summary>
+            <value>The entity security key.</value>
+        </member>
+        <member name="P:Rhino.Security.Model.Permission.Allow">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:Rhino.Security.Model.Permission"/> is allowing 
+            or denying the operation.
+            </summary>
+            <value><c>true</c> if allow; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:Rhino.Security.Model.Permission.User">
+            <summary>
+            Gets or sets the user this permission belongs to.
+            </summary>
+            <value>The user.</value>
+        </member>
+        <member name="P:Rhino.Security.Model.Permission.UsersGroup">
+            <summary>
+            Gets or sets the users group this permission belongs to
+            </summary>
+            <value>The users group.</value>
+        </member>
+        <member name="P:Rhino.Security.Model.Permission.EntitiesGroup">
+            <summary>
+            Gets or sets the entities group this permission belongs to
+            </summary>
+            <value>The entities group.</value>
+        </member>
+        <member name="P:Rhino.Security.Model.Permission.Level">
+            <summary>
+            Gets or sets the level of this permission
+            </summary>
+            <value>The level.</value>
+        </member>
+        <member name="P:Rhino.Security.Model.Permission.EntityTypeName">
+            <summary>
+            Gets or sets the type of the entity.
+            </summary>
+            <value>The type of the entity.</value>
+        </member>
+    </members>
+</doc>

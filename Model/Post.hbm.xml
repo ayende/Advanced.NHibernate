@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+				   assembly="Model"
+				   namespace="Model">
+	<class name="Post"
+		   table="Posts">
+		<id name="Id">
+			<generator class="identity"/>
+		</id>
+		<property name="Title"/>
+		<property name="Text"/>
+		<property name="PostedAt"/>
+		<many-to-one name="Blog" class="Blog"
+					 column="BlogId"/>
+		<many-to-one name="User" class="User"
+					 column="UserId"/>
+		<set name="Comments"
+			 table="Comments">
+			<key column="PostId"/>
+			<one-to-many class="Comment"/>
+		</set>
+		<set name="Categories"
+			 table="CategoriesPosts">
+			<key column="PostId"/>
+			<many-to-many class="Category"
+						  column="CategoryId"/>
+		</set>
+		<set name="Tags"
+			 where="ISNULL(ItemType,1) = 1" 
+			 table="Tags">
+			<key column="ItemId"/>
+			<one-to-many class="Tag"/>
+		</set>
+	</class>
+</hibernate-mapping>

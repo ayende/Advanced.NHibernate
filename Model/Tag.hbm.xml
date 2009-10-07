@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+				   assembly="Model"
+				   namespace="Model">
+	<class name="Tag" table="Tags">
+		<id name="Id">
+			<generator class="identity"/>
+		</id>
+		<property name="Name"/>
+		<any name="Entity"
+			 id-type="Int32"
+			 meta-type="Int32">
+			<meta-value class="Post" value="1"/>
+			<meta-value class="Blog" value ="2"/>
+			<column name="ItemId"/>
+			<column name="ItemType"/>
+		</any>
+	</class>
+</hibernate-mapping>
