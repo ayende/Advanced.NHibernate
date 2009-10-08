@@ -65,6 +65,11 @@ namespace Search
 							.CreateFullTextQuery<Post>("Title:NHibernate User.Name:ayende")
 							.List<Post>();
 
+						NHibernate.Search.Search.CreateFullTextSession(s)
+							.CreateFullTextQuery<Post>("Title:NHibernate User.Name:ayende")
+							.SetMaxResults(10)
+							.List<Post>();
+
 						foreach (var post in posts)
 						{
 							Console.WriteLine(post.Title);
