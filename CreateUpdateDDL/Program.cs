@@ -18,7 +18,7 @@ namespace CreateUpdateDDL
 				var configuration = new Configuration()
 					.Configure("NHibernate.config");
 
-				//new SchemaExport(configuration).Create(true, true);
+				new SchemaExport(configuration).Create(true, true);
 				//new SchemaUpdate(configuration).Execute(true, true);
 				//new SchemaValidator(configuration).Validate();
 
